@@ -1,0 +1,47 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<title>Starbucks Finder</title> 
+    <style>
+      html, body {
+        height: 100%;
+        padding: 5px;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoeA9wWpE6hOgXNdyGlIaz4iQiehoetaE&libraries=places"></script>
+<script src="./javascripts/new.js"> 
+
+</script> 
+<script type="text/javascript">
+        function GetData(){
+			document.getElementById("map").style.display="block";
+            var xhr=new XMLHttpRequest();
+            xhr.open("GET","http://localhost:1337/",true);
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4){
+                    if(xhr.status==200){
+                        document.getElementById("map").innerHTML=xhr.responseText;
+                    }
+                }
+            }
+            xhr.send(null);
+        }
+    </script>
+</head> 
+<body onload="init()"> 
+<form action="http://127.0.0.1:1337/process_get" method="GET"> 
+Your location is: <br>
+latitude: <input id="lat" type="text" name="lat" />
+longitude: <input id="lng" type="text" name="lng"/> 
+<input type="submit" value="Click to change to the list View" />
+<br>
+The Starbucks restaurants around you:
+</form>
+<br>
+<div id="map"></div> 
+</body> 
+</html> 
