@@ -2,6 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"> 
 <head> 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<title>Starbucks Finder</title> 
     <style>
       html, body {
@@ -14,7 +18,6 @@
     </style>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoeA9wWpE6hOgXNdyGlIaz4iQiehoetaE&libraries=places"></script>
 <script src="./javascripts/new.js"> 
-
 </script> 
 <script type="text/javascript">
         function GetData(){
@@ -34,14 +37,42 @@
 </head> 
 <body onload="init()"> 
 <form action="http://127.0.0.1:1337/process_get" method="GET"> 
-Your location is: <br>
-latitude: <input id="lat" type="text" name="lat" />
-longitude: <input id="lng" type="text" name="lng"/> 
-<input type="submit" value="Click to change to the list View" />
-<br>
-The Starbucks restaurants around you:
+	<h2>Welcome!</h2>
+	<label>Your location is: </label>
+	<br>
+	<div class="row">
+		<div class="col-md-1">
+			<label>latitude: </label>
+		</div>
+		<div class="col-md-2">
+			<input id="lat" type="text" class="form-control" name="lat"/>
+		</div>
+	</div>
+	<div class="row">
+			<div class="col-md-1">
+				<label>longitude: </label>
+			</div>
+			<div class="col-md-2">
+				<input id="lng" type="text" class="form-control" name="lng"/>	
+			</div>
+		</div>
+		<br>
+	<div class="row">
+		<div class="col-md-4">
+		<input type="submit" value="Click to change to the list View" />
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-md-5">
+			<label>The Starbucks restaurants around you:</label>
+		</div>
+	</div>
 </form>
 <br>
-<div id="map"></div> 
+
+<div class="row" id="map">
+</div> 
+
 </body> 
 </html> 
