@@ -1,4 +1,3 @@
-
 //import
 var http = require('http'); 
 var fs=require('fs');
@@ -7,6 +6,7 @@ var express = require('express');
 var list=new Array(); 
 var latitude;
 var longitude;
+
 //read database
 fs.readFile('G:/technical_test/starbucks_new_york.json',function(err,data){  
 	if(err)  
@@ -16,7 +16,7 @@ fs.readFile('G:/technical_test/starbucks_new_york.json',function(err,data){
 	var length=0;  
 	var size=jsonObj.length;
 	
-	for(var i=0;i<size;i++){ //Read file 
+	for(var i=0;i<size;i++){ 
 		var record =jsonObj[i];
 		list[i] = record;
 		//console.log(list[i]['id']);
@@ -32,11 +32,26 @@ app.get('/index.htm', function (req, res) {
    res.sendFile( __dirname + "/" + "index.htm" );
 })	
 
-var response="\nThe Starbucks restaurants around you are:\n";	
+//Showing list
+var html = '<html>'  
+        +'<head>'  
+		+'<title>Starbucks Finder</title>'  
+        +'<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1"/>'
+		+'<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>'
+        +'<link rel="stylesheet" type="text/css" href="./bootstrap/css/bootstrap.min.css" />'  
+        +'<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>'  
+        +'<style>'
+		+'html, body {margin: 5px;font-size:18px;}'
+		+'</style>'		
+		+'</head>'  
+        +'<body>' 
+		+'<h3>The Starbucks restaurants around you are:</h3>';	
+//var response="\nThe Starbucks restaurants around you are:\n";	
 app.get('/process_get', function (req, res) {
 	latitude=req.query.lat;
 	longitude=req.query.lng;
-	res.write('Your location is:\nlatitude:'+latitude+',longitude:'+longitude+'\n');
+	
+	//res.write('Your location is:\nlatitude:'+latitude+',longitude:'+longitude+'\n');
 	for(var i=0;i<list.length;i++){ 		
 		var lat =list[i]['location']['latitude']; 
 		var lon =list[i]['location']['longitude']; 
@@ -47,12 +62,14 @@ app.get('/process_get', function (req, res) {
 	list.sort(keysrt('distance',false));
 	
 	for(var i=0;i<10;i++){		
-	var value=(i+1) +": Name:"+list[i]['name']+" ; Address:"+ list[i]['street']+'\n';
-	response+=value;
+		var value=(i+1) +": Name:"+list[i]['name']+" ; Address:"+ list[i]['street']+'\n';
+		html+=value ;
+		html+='<br>';
 	}
-  
-   //console.log(response);
-   res.end(response);
+	html+='</body>';
+    html+='</html>';  
+
+    res.end(html);
 })
 		
 function keysrt(key,desc) {
@@ -63,10 +80,9 @@ function keysrt(key,desc) {
 
 var server = app.listen(1337, function () {
 
-  var host = erver.address().address
+  var host = server.address().address
   var port = server.address().port
 
   console.log("Server running at http://%s:%s", host, port)
 
 });
-
