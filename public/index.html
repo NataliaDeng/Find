@@ -10,10 +10,13 @@
     <style>
       html, body {
         height: 100%;
-        padding: 5px;
+        margin: 5px;
+		font-size:18px;
       }
       #map {
+	  margin: 5px;
         height: 100%;
+		width:96%;
       }
     </style>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoeA9wWpE6hOgXNdyGlIaz4iQiehoetaE&libraries=places"></script>
@@ -42,7 +45,7 @@
 	<br>
 	<div class="row">
 		<div class="col-md-1">
-			<label>latitude: </label>
+			<p>latitude: </p>
 		</div>
 		<div class="col-md-2">
 			<input id="lat" type="text" class="form-control" name="lat"/>
@@ -50,13 +53,13 @@
 	</div>
 	<div class="row">
 			<div class="col-md-1">
-				<label>longitude: </label>
+				<p>longitude: </p>
 			</div>
 			<div class="col-md-2">
 				<input id="lng" type="text" class="form-control" name="lng"/>	
 			</div>
-		</div>
-		<br>
+	</div>
+	<br>
 	<div class="row">
 		<div class="col-md-4">
 		<input type="submit" value="Click to change to the list View" />
@@ -69,8 +72,6 @@
 		</div>
 	</div>
 </form>
-<br>
-
 <div class="row" id="map">
 </div> 
 
