@@ -8,7 +8,7 @@ var latitude;
 var longitude;
 
 //read database
-fs.readFile('G:/technical_test/starbucks_new_york.json',function(err,data){  
+fs.readFile('starbucks_new_york.json',function(err,data){  
 	if(err)  
 		throw err;  
 		  
@@ -46,12 +46,11 @@ var html = '<html>'
 		+'</head>'  
         +'<body>' 
 		+'<h3>The Starbucks restaurants around you are:</h3>';	
-//var response="\nThe Starbucks restaurants around you are:\n";	
+
 app.get('/process_get', function (req, res) {
 	latitude=req.query.lat;
 	longitude=req.query.lng;
-	
-	//res.write('Your location is:\nlatitude:'+latitude+',longitude:'+longitude+'\n');
+
 	for(var i=0;i<list.length;i++){ 		
 		var lat =list[i]['location']['latitude']; 
 		var lon =list[i]['location']['longitude']; 
@@ -62,7 +61,7 @@ app.get('/process_get', function (req, res) {
 	list.sort(keysrt('distance',false));
 	
 	for(var i=0;i<10;i++){		
-		var value=(i+1) +": Name:"+list[i]['name']+" ; Address:"+ list[i]['street']+'\n';
+		var value=(i+1) +": <strong>Name</strong>: "+list[i]['name']+"; <strong>Address</strong>: "+ list[i]['street']+'\n';
 		html+=value ;
 		html+='<br>';
 	}
